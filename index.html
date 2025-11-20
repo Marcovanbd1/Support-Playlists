@@ -8,30 +8,19 @@
   <style>
     :root {
       --bg-main: #020617;
-      --bg-elevated: #020617;
       --bg-card: #020617;
-      --bg-soft: #020617;
-      --bg-section: #020617;
-
       --grad-1: radial-gradient(circle at top, #1f2937 0, #020617 55%);
       --grad-2: radial-gradient(circle at top left, rgba(56,189,248,0.16), #020617 55%);
       --grad-3: radial-gradient(circle at top right, rgba(34,197,94,0.16), #020617 60%);
-
       --accent: #38bdf8;
-      --accent-soft: rgba(56,189,248,0.16);
       --accent-2: #22c55e;
-      --accent-soft-2: rgba(34,197,94,0.18);
-
       --text-main: #f9fafb;
       --text-muted: #9ca3af;
       --text-soft: #6b7280;
-      --text-soft-2: #4b5563;
       --border-subtle: rgba(148,163,184,0.35);
-
       --radius-lg: 20px;
       --radius-card: 18px;
       --radius-pill: 999px;
-
       --shadow-soft: 0 22px 60px rgba(15,23,42,0.95);
     }
 
@@ -61,15 +50,8 @@
       }
     }
 
-    /* Header and nav */
-
     header {
       padding: 0.75rem 0 2.5rem;
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      background: linear-gradient(to bottom, rgba(2,6,23,0.96), rgba(2,6,23,0.92), rgba(2,6,23,0.85), transparent);
-      backdrop-filter: blur(20px);
     }
 
     .header-inner {
@@ -142,6 +124,7 @@
       flex-wrap: wrap;
       gap: 0.4rem;
       font-size: 0.8rem;
+      margin-top: 0.4rem;
     }
 
     .nav a {
@@ -161,13 +144,10 @@
       color: #e5e7eb;
     }
 
-    .nav a.active {
-      border-color: rgba(148,163,184,0.8);
-      background: rgba(15,23,42,0.96);
-      color: #e5e7eb;
+    .nav a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
     }
-
-    /* Hero */
 
     .hero {
       padding-top: 1.5rem;
@@ -222,8 +202,6 @@
       background: rgba(15,23,42,0.95);
       border: 1px solid rgba(148,163,184,0.35);
     }
-
-    /* Sections */
 
     section {
       margin-top: 2.75rem;
@@ -438,8 +416,6 @@
       color: var(--text-soft);
     }
 
-    /* CTA */
-
     .cta-row {
       margin-top: 1.7rem;
       display: flex;
@@ -511,496 +487,451 @@
   </style>
 </head>
 <body>
-  <main>
-    <header>
-      <div class="header-inner">
-        <div class="brand">
-          <div class="logo-dot" aria-hidden="true"></div>
-          <div>
-            <div class="brand-main">Support Playlists™</div>
-            <div class="brand-sub">A Neighbourhood CoLab concept in non-clinical navigation intelligence</div>
-          </div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:0.5rem;align-items:flex-start;">
-          <div class="tag-pill">
-            <span class="tag-dot"></span>
-            Category definition · Public marker of intent
-          </div>
-          <nav class="nav" aria-label="Page sections">
-            <a href="#declaration" class="nav-link active">Overview</a>
-            <a href="#definition" class="nav-link">Definition</a>
-            <a href="#whynow" class="nav-link">Why now</a>
-            <a href="#architecture" class="nav-link">Architecture</a>
-            <a href="#foundations" class="nav-link">Foundations</a>
-            <a href="#boundaries" class="nav-link">Boundaries</a>
-            <a href="#origin" class="nav-link">Origin</a>
-            <a href="#opportunities" class="nav-link">Opportunities</a>
-            <a href="#invitation" class="nav-link">Invitation</a>
-          </nav>
+<main>
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <div class="logo-dot" aria-hidden="true"></div>
+        <div>
+          <div class="brand-main">Support Playlists™</div>
+          <div class="brand-sub">A Neighbourhood CoLab concept in non-clinical navigation intelligence</div>
         </div>
       </div>
-      <section id="declaration" class="hero">
-        <div class="hero-kicker">A new layer in the health and life ecosystem</div>
-        <h1 class="hero-title">Support Playlists define a new category of navigation.</h1>
-        <p class="hero-lede">
-          Support Playlists™ are short, time sequenced pathways that sit between clinical care and the rest of life. 
-          They translate what a person says in their own words into a small number of next steps that blend local, national and digital support.
-        </p>
-        <p class="hero-highlight">
-          This page sets out the category in public. It is written for founders, investors and system leaders who sense that symptom checkers and static signposting are not enough. 
-          It is a marker of authorship and intent, not a product pitch.
-        </p>
-        <div class="hero-meta">
-          <span>Originated in Weymouth and Portland Primary Care Network</span>
-          <span>Non-clinical navigation intelligence · Platform agnostic · Voice first</span>
-          <span>Support Playlists™ · Demand Shaping Intelligence™ · Emotional Architecture™</span>
+      <div style="display:flex;flex-direction:column;gap:0.5rem;align-items:flex-start;">
+        <div class="tag-pill">
+          <span class="tag-dot"></span>
+          Category definition · Public marker of intent
         </div>
-      </section>
-    </header>
-
-    <!-- Definition -->
-    <section id="definition" class="alt">
-      <div class="section-kicker">Definition</div>
-      <h2 class="section-title">What a Support Playlist is</h2>
-      <p class="section-intro">
-        A Support Playlist is not a directory and not a care plan. 
-        It is a small, realistic path that treats navigation as serious work in its own right. 
-        It is generated from what someone says about their situation today and it updates as their life moves.
+        <nav class="nav" aria-label="Page sections">
+          <a href="#declaration">Overview</a>
+          <a href="#definition">Definition</a>
+          <a href="#whynow">Why now</a>
+          <a href="#architecture">Architecture</a>
+          <a href="#foundations">Foundations</a>
+          <a href="#boundaries">Boundaries</a>
+          <a href="#origin">Origin</a>
+          <a href="#opportunities">Opportunities</a>
+          <a href="#invitation">Invitation</a>
+        </nav>
+      </div>
+    </div>
+    <section id="declaration" class="hero">
+      <div class="hero-kicker">A new layer in the health and life ecosystem</div>
+      <h1 class="hero-title">Support Playlists define a new category of navigation.</h1>
+      <p class="hero-lede">
+        Support Playlists™ are short, time sequenced pathways that sit between clinical care and the rest of life. 
+        They translate what a person says in their own words into a small number of next steps that blend local, national and digital support.
       </p>
-
-      <div class="definition-card">
-        <span class="label">Working definition</span>
-        <p>
-          A <strong>Support Playlist</strong> is a short, time sequenced set of next steps, tailored to a person, that blends:
-        </p>
-        <ul>
-          <li>emotional grounding and self care</li>
-          <li>local community and voluntary support</li>
-          <li>trusted national resources and helplines</li>
-          <li>digital tools and peer support</li>
-        </ul>
-        <p>
-          Each playlist is specific, kind and possible. It answers a simple question. 
-          <strong>Given what you have just told us, what are the next few steps that might actually help you.</strong>
-        </p>
-      </div>
-
-      <div class="columns two">
-        <div class="card">
-          <small>What goes in</small>
-          <h3>Natural language and life signals</h3>
-          <p>
-            People speak or type in their own words. 
-            Triage outcomes, demographic data and behavioural patterns add context. 
-            The system listens for demand, risk and intent across clinical and non clinical domains.
-          </p>
-        </div>
-        <div class="card">
-          <small>What comes out</small>
-          <h3>Three to five next steps</h3>
-          <p>
-            Clear, short actions grouped by time. Tonight. Tomorrow. This week. If it gets worse. 
-            Each step links to something real in the local or national system. Nothing is hypothetical or ungrounded.
-          </p>
-        </div>
+      <p class="hero-highlight">
+        This page sets out the category in public. It is written for founders, investors and system leaders who sense that symptom checkers and static signposting are not enough. 
+        It is a marker of authorship and intent, not a product pitch.
+      </p>
+      <div class="hero-meta">
+        <span>Originated in Weymouth and Portland Primary Care Network</span>
+        <span>Non-clinical navigation intelligence · Platform agnostic · Voice first</span>
+        <span>Support Playlists™ · Demand Shaping Intelligence™ · Emotional Architecture™</span>
       </div>
     </section>
+  </header>
 
-    <!-- Why now -->
-    <section id="whynow">
-      <div class="section-kicker">Why this category exists now</div>
-      <h2 class="section-title">Systems are full. Lives are complex. Navigation has not kept up.</h2>
-      <p class="section-intro">
-        Across primary care, mental health and long term conditions people meet symptom checkers, waiting lists and static signposting pages. 
-        Services are under pressure. Citizens are exhausted. Both sides need a gentler and smarter way to match need to what is genuinely available.
-      </p>
+  <!-- Definition -->
+  <section id="definition" class="alt">
+    <div class="section-kicker">Definition</div>
+    <h2 class="section-title">What a Support Playlist is</h2>
+    <p class="section-intro">
+      A Support Playlist is not a directory and not a care plan. 
+      It is a small, realistic path that treats navigation as serious work in its own right. 
+      It is generated from what someone says about their situation today and it updates as their life moves.
+    </p>
 
-      <div class="columns two">
-        <div class="card">
-          <h3>For citizens and families</h3>
-          <ul>
-            <li>They are told to go online but often find walls of links and leaflets.</li>
-            <li>They do not know what is NHS, what is charity and what is commercial.</li>
-            <li>They are asked to complete long forms when they are already overwhelmed.</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>For systems and commissioners</h3>
-          <ul>
-            <li>Investment goes into services but routes in are unclear or inconsistent.</li>
-            <li>Signposting tools rarely show who used what, or whether it helped.</li>
-            <li>Clinicians see demand that could have been met earlier and elsewhere.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="columns two" style="margin-top:1.6rem;">
-        <div class="card">
-          <h3>The macro conditions</h3>
-          <ul>
-            <li>Ageing populations and rising long term conditions increase complexity.</li>
-            <li>Workforce pressure and burnout limit clinical capacity.</li>
-            <li>Economic strain and inequality push more need into primary and emergency care.</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>The technology inflection</h3>
-          <ul>
-            <li>Large language models can now understand natural language at scale.</li>
-            <li>Behavioural analytics can reveal real time demand and friction.</li>
-            <li>Digital inclusion has increased through mainstream tools such as the NHS App.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="quote">
-        Support Playlists treat navigation as emotional and structural work, not an afterthought at the end of a web page. 
-        The category is possible now because AI has collapsed the cost of curation without collapsing the standard of care.
-      </div>
-    </section>
-
-    <!-- Architecture -->
-    <section id="architecture" class="light">
-      <div class="section-kicker">High level architecture</div>
-      <h2 class="section-title">Where Support Playlists sit in the journey</h2>
-      <p class="section-intro">
-        Support Playlists are designed as a non clinical navigation engine. 
-        They are platform agnostic and can live inside online triage flows, hospital discharge pathways, employer hubs, apps, kiosks or voice assistants. 
-        The pattern stays the same. Listen. Understand. Sequence. Learn.
-      </p>
-
-      <div class="columns three">
-        <div class="card">
-          <small>Step 1</small>
-          <h3>Listen for demand</h3>
-          <p>
-            A person tells us what is happening in their own words. 
-            This might happen in a triage tool, through voice, or in a simple text field. 
-            Clinical and non clinical needs are heard together.
-          </p>
-        </div>
-        <div class="card">
-          <small>Step 2</small>
-          <h3>Generate the playlist</h3>
-          <p>
-            The Support Playlists engine combines language understanding with a catalogue of local, national and digital options. 
-            It assembles a small number of sequenced next steps that fit the pattern of need and the reality of the local offer.
-          </p>
-        </div>
-        <div class="card">
-          <small>Step 3</small>
-          <h3>Close the loop</h3>
-          <p>
-            Demand Shaping Intelligence™ tracks which steps people actually take and whether they return. 
-            Over time this learns which paths stabilise demand and where new support is needed.
-          </p>
-        </div>
-      </div>
-
-      <div class="diagram">
-        <div class="diagram-title">Diagram 1 · The Support Playlist pattern</div>
-        <div class="diagram-flow">
-          <div class="diagram-chip">Listen</div>
-          <span class="diagram-arrow">→</span>
-          <div class="diagram-chip">Understand</div>
-          <span class="diagram-arrow">→</span>
-          <div class="diagram-chip">Sequence</div>
-          <span class="diagram-arrow">→</span>
-          <div class="diagram-chip">Learn</div>
-        </div>
-        <p style="margin-top:0.9rem;">
-          The same pattern can sit underneath many brands and interfaces. The category lives beneath the surface.
-        </p>
-      </div>
-
-      <div class="diagram" style="margin-top:1.4rem;">
-        <div class="diagram-title">Diagram 2 · The Demand Shaping loop</div>
-        <div class="diagram-flow">
-          <div class="diagram-chip">Need</div>
-          <span class="diagram-arrow">→</span>
-          <div class="diagram-chip">Pathway</div>
-          <span class="diagram-arrow">→</span>
-          <div class="diagram-chip">Behaviour</div>
-          <span class="diagram-arrow">→</span>
-          <div class="diagram-chip">Signal</div>
-          <span class="diagram-arrow">→</span>
-          <div class="diagram-chip">Adapt</div>
-        </div>
-        <p style="margin-top:0.9rem;">
-          Demand Shaping Intelligence™ is not a product on its own. 
-          It is the feedback layer that lets commissioners and partners see demand signals emerging before they appear as pressure in urgent and unplanned care.
-        </p>
-      </div>
-
-      <p class="footnote">
-        Together, Support Playlists™ and Demand Shaping Intelligence™ describe a new layer in the stack: non clinical navigation intelligence.
-      </p>
-    </section>
-
-    <!-- Foundational concepts -->
-    <section id="foundations" class="alt">
-      <div class="section-kicker">Foundational concepts</div>
-      <h2 class="section-title">The field of non clinical navigation intelligence</h2>
-      <p class="section-intro">
-        Support Playlists sit inside a wider conceptual field. 
-        This field can be thought of as <strong>non clinical navigation intelligence</strong> – the ideas and methods that govern how people move through complex systems in everyday life.
-      </p>
-
-      <div class="columns two">
-        <div class="card">
-          <h3>Non clinical navigation intelligence</h3>
-          <p>
-            The layer of understanding that focuses on the life around the symptom. 
-            Work, money, caring, housing, identity and belonging. 
-            It learns how people actually navigate support and adapts the routes in real time.
-          </p>
-        </div>
-        <div class="card">
-          <h3>The lived moment</h3>
-          <p>
-            The point at which a person reaches out for help. 
-            Support Playlists are designed to start from this moment, not from abstract population segments. 
-            They assume that how it feels in the first few minutes matters.
-          </p>
-        </div>
-        <div class="card">
-          <h3>Emotional Architecture™</h3>
-          <p>
-            The intentional design of how a journey feels, lands and is remembered. 
-            Emotional Architecture™ shapes language, sequence and expectation so that people feel held rather than processed.
-          </p>
-        </div>
-        <div class="card">
-          <h3>Time sequenced support</h3>
-          <p>
-            Organising help by time rather than by organisation chart. 
-            Tonight. Tomorrow. This week. If it gets worse. 
-            Time sequencing reflects how people actually move through change.
-          </p>
-        </div>
-        <div class="card">
-          <h3>Life signals</h3>
-          <p>
-            The small behavioural signals that show how people are moving through a playlist. 
-            Which steps they take. Where they stall. What they return to. 
-            Life signals power Demand Shaping Intelligence™.
-          </p>
-        </div>
-        <div class="card">
-          <h3>Stabilising demand</h3>
-          <p>
-            The aim is not to push people away from care. 
-            It is to give them a path that stabilises the situation enough that clinical services can focus on what only they can do.
-          </p>
-        </div>
-      </div>
-
-      <div class="quote">
-        You can think of Support Playlists as emotional architecture applied to navigation. 
-        We are as interested in how a pathway feels as we are in where it routes someone.
-      </div>
-    </section>
-
-    <!-- Boundaries -->
-    <section id="boundaries">
-      <div class="section-kicker">Category boundaries</div>
-      <h2 class="section-title">What Support Playlists are not</h2>
-      <p class="section-intro">
-        Clear boundaries matter. 
-        Support Playlists are designed to work alongside existing tools, not to replace them. 
-        The category is distinct from the products and services that surround it.
-      </p>
-
-      <div class="columns two">
-        <div class="card">
-          <h3>Not a symptom checker</h3>
-          <p>
-            Symptom checkers focus on clinical risk. 
-            Support Playlists focus on the life around the risk. 
-            The two can work together, with playlists sitting alongside or immediately after triage.
-          </p>
-        </div>
-        <div class="card">
-          <h3>Not a directory</h3>
-          <p>
-            Directories list services. 
-            Support Playlists build a small route through the options. 
-            They are editorial and behavioural, not exhaustive.
-          </p>
-        </div>
-        <div class="card">
-          <h3>Not social prescribing</h3>
-          <p>
-            Social prescribing relies on human relationships and skilled connectors. 
-            Support Playlists do not replace this. 
-            They give prescribers and link workers a clearer baseline path to start from.
-          </p>
-        </div>
-        <div class="card">
-          <h3>Not a wellbeing app</h3>
-          <p>
-            Support Playlists are not a direct to consumer lifestyle product. 
-            They are an underlying layer that other platforms and institutions can connect to.
-          </p>
-        </div>
-      </div>
-
-      <div class="badge-row">
-        <span class="badge badge-accent">Support Playlists™ · Navigation engine</span>
-        <span class="badge">Demand Shaping Intelligence™ · Feedback layer</span>
-        <span class="badge">Emotional Architecture™ · Design method</span>
-      </div>
-    </section>
-
-    <!-- Origin -->
-    <section id="origin" class="alt">
-      <div class="section-kicker">Origin story</div>
-      <h2 class="section-title">Where this work began</h2>
-      <p class="section-intro">
-        Support Playlists did not begin in a lab or a headquarters. 
-        They emerged on Portland on the south coast of England, inside one Primary Care Network, through day to day work on access, demand and digital inclusion.
-      </p>
-
+    <div class="definition-card">
+      <span class="label">Working definition</span>
       <p>
-        Since late 2024, work in Weymouth and Portland Primary Care Network has explored:
+        A <strong>Support Playlist</strong> is a short, time sequenced set of next steps, tailored to a person, that blends:
       </p>
       <ul>
-        <li>a PCN wide digital offer for residents, including QuickLinks and peer to peer campaigns</li>
-        <li>Neighbourhood level signals on what people search for and where they get stuck</li>
-        <li>early Support Playlists for mental health, money worries, loneliness and long term conditions</li>
+        <li>emotional grounding and self care</li>
+        <li>local community and voluntary support</li>
+        <li>trusted national resources and helplines</li>
+        <li>digital tools and peer support</li>
       </ul>
       <p>
-        This has been built by a very small team using off the shelf tools and large language models. 
-        The work completed to date is similar in scope to what would previously have required large editorial and analytics teams. 
-        AI has collapsed the cost and time, not the level of care.
+        Each playlist is specific, kind and possible. It answers a simple question. 
+        <strong>Given what you have just told us, what are the next few steps that might actually help you.</strong>
       </p>
-      <p>
-        The concepts of <strong>Support Playlists™</strong> and <strong>Demand Shaping Intelligence™</strong> are being explored and refined in public. 
-        They are held by <strong>Neighbourhood CoLab CIC</strong>, a small organisation created to test emotionally safe AI and neighbourhood based digital infrastructure.
-      </p>
-      <p class="footnote">
-        Originated and developed by <strong>Mark Winterburn</strong> on Portland, Dorset. 
-        This page exists as a clear public record of authorship and intent as the category develops.
-      </p>
-    </section>
+    </div>
 
-    <!-- Opportunities -->
-    <section id="opportunities" class="light">
-      <div class="section-kicker">Two parallel opportunities</div>
-      <h2 class="section-title">A module that can stand up. A category that has not existed.</h2>
-      <p class="section-intro">
-        There are two ways to engage with this work. 
-        The first is practical and near term. 
-        The second is larger and strategic.
-      </p>
-
-      <div class="columns two">
-        <div class="card">
-          <h3>1. The module that switches on</h3>
-          <p>
-            Design and test a Support Playlists module that plugs into an existing triage or digital front door. 
-            This is the implementation route. 
-            Stand something up. Watch how people use it. 
-            Prove that it works for residents and systems.
-          </p>
-        </div>
-        <div class="card">
-          <h3>2. The category level work</h3>
-          <p>
-            Work on the broader emotional architecture and governance of the field. 
-            What it should feel like at national scale when someone anywhere can speak into a device and receive a Support Playlist that reflects their life. 
-            This is the path for investors, policy leaders and large platforms.
-          </p>
-        </div>
+    <div class="columns two">
+      <div class="card">
+        <small>What goes in</small>
+        <h3>Natural language and life signals</h3>
+        <p>
+          People speak or type in their own words. 
+          Triage outcomes, demographic data and behavioural patterns add context. 
+          The system listens for demand, risk and intent across clinical and non clinical domains.
+        </p>
       </div>
-
-      <div class="quote">
-        Whoever defines the category and the standards for non clinical navigation intelligence will shape how future citizens experience help in their first moments of need.
+      <div class="card">
+        <small>What comes out</small>
+        <h3>Three to five next steps</h3>
+        <p>
+          Clear, short actions grouped by time. Tonight. Tomorrow. This week. If it gets worse. 
+          Each step links to something real in the local or national system. Nothing is hypothetical or ungrounded.
+        </p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Invitation -->
-    <section id="invitation">
-      <div class="section-kicker">Invitation</div>
-      <h2 class="section-title">Ready to explore with commissioners and partners</h2>
-      <p class="section-intro">
-        This page is the beginning of a Support Playlists paper and manifesto. 
-        The intention is simple. 
-        To name the category. 
-        To describe it clearly. 
-        To invite the right partners to help shape it responsibly.
-      </p>
-      <p>
-        If you are commissioning, building or researching the next layer of navigation and support, there are useful conversations to have. 
-        About pilots. About standards. About shared infrastructure. 
-        About how to protect people while making use of what AI can now do.
-      </p>
+  <!-- Why now -->
+  <section id="whynow">
+    <div class="section-kicker">Why this category exists now</div>
+    <h2 class="section-title">Systems are full. Lives are complex. Navigation has not kept up.</h2>
+    <p class="section-intro">
+      Across primary care, mental health and long term conditions people meet symptom checkers, waiting lists and static signposting pages. 
+      Services are under pressure. Citizens are exhausted. Both sides need a gentler and smarter way to match need to what is genuinely available.
+    </p>
 
-      <div class="cta-row">
-        <a href="mailto:hello@neighbourhoodcolab.co.uk" class="btn btn-primary">Start a conversation</a>
-        <a href="https://www.linkedin.com/in/mark-winterburn-08a614351/" target="_blank" class="btn btn-ghost" rel="noreferrer">Connect on LinkedIn</a>
+    <div class="columns two">
+      <div class="card">
+        <h3>For citizens and families</h3>
+        <ul>
+          <li>They are told to go online but often find walls of links and leaflets.</li>
+          <li>They do not know what is NHS, what is charity and what is commercial.</li>
+          <li>They are asked to complete long forms when they are already overwhelmed.</li>
+        </ul>
       </div>
+      <div class="card">
+        <h3>For systems and commissioners</h3>
+        <ul>
+          <li>Investment goes into services but routes in are unclear or inconsistent.</li>
+          <li>Signposting tools rarely show who used what, or whether it helped.</li>
+          <li>Clinicians see demand that could have been met earlier and elsewhere.</li>
+        </ul>
+      </div>
+    </div>
 
-      <p class="footnote">
-        This site will grow into a fuller paper over time. 
-        For now it serves as a clear public marker of the Support Playlists™ and Demand Shaping Intelligence™ concepts and as a shared reference point for ongoing work.
+    <div class="columns two" style="margin-top:1.6rem;">
+      <div class="card">
+        <h3>The macro conditions</h3>
+        <ul>
+          <li>Ageing populations and rising long term conditions increase complexity.</li>
+          <li>Workforce pressure and burnout limit clinical capacity.</li>
+          <li>Economic strain and inequality push more need into primary and emergency care.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>The technology inflection</h3>
+        <ul>
+          <li>Large language models can now understand natural language at scale.</li>
+          <li>Behavioural analytics can reveal real time demand and friction.</li>
+          <li>Digital inclusion has increased through mainstream tools such as the NHS App.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="quote">
+      Support Playlists treat navigation as emotional and structural work, not an afterthought at the end of a web page. 
+      The category is possible now because AI has collapsed the cost of curation without collapsing the standard of care.
+    </div>
+  </section>
+
+  <!-- Architecture -->
+  <section id="architecture" class="light">
+    <div class="section-kicker">High level architecture</div>
+    <h2 class="section-title">Where Support Playlists sit in the journey</h2>
+    <p class="section-intro">
+      Support Playlists are designed as a non clinical navigation engine. 
+      They are platform agnostic and can live inside online triage flows, hospital discharge pathways, employer hubs, apps, kiosks or voice assistants. 
+      The pattern stays the same. Listen. Understand. Sequence. Learn.
+    </p>
+
+    <div class="columns three">
+      <div class="card">
+        <small>Step 1</small>
+        <h3>Listen for demand</h3>
+        <p>
+          A person tells us what is happening in their own words. 
+          This might happen in a triage tool, through voice, or in a simple text field. 
+          Clinical and non clinical needs are heard together.
+        </p>
+      </div>
+      <div class="card">
+        <small>Step 2</small>
+        <h3>Generate the playlist</h3>
+        <p>
+          The Support Playlists engine combines language understanding with a catalogue of local, national and digital options. 
+          It assembles a small number of sequenced next steps that fit the pattern of need and the reality of the local offer.
+        </p>
+      </div>
+      <div class="card">
+        <small>Step 3</small>
+        <h3>Close the loop</h3>
+        <p>
+          Demand Shaping Intelligence™ tracks which steps people actually take and whether they return. 
+          Over time this learns which paths stabilise demand and where new support is needed.
+        </p>
+      </div>
+    </div>
+
+    <div class="diagram">
+      <div class="diagram-title">Diagram 1 · The Support Playlist pattern</div>
+      <div class="diagram-flow">
+        <div class="diagram-chip">Listen</div>
+        <span class="diagram-arrow">→</span>
+        <div class="diagram-chip">Understand</div>
+        <span class="diagram-arrow">→</span>
+        <div class="diagram-chip">Sequence</div>
+        <span class="diagram-arrow">→</span>
+        <div class="diagram-chip">Learn</div>
+      </div>
+      <p style="margin-top:0.9rem;">
+        The same pattern can sit underneath many brands and interfaces. The category lives beneath the surface.
       </p>
-    </section>
+    </div>
 
-    <footer>
-      <p>
-        Support Playlists™ · Demand Shaping Intelligence™ · Emotional Architecture™ are concepts developed by <strong>Mark Winterburn</strong> through Neighbourhood CoLab CIC.
+    <div class="diagram" style="margin-top:1.4rem;">
+      <div class="diagram-title">Diagram 2 · The Demand Shaping loop</div>
+      <div class="diagram-flow">
+        <div class="diagram-chip">Need</div>
+        <span class="diagram-arrow">→</span>
+        <div class="diagram-chip">Pathway</div>
+        <span class="diagram-arrow">→</span>
+        <div class="diagram-chip">Behaviour</div>
+        <span class="diagram-arrow">→</span>
+        <div class="diagram-chip">Signal</div>
+        <span class="diagram-arrow">→</span>
+        <div class="diagram-chip">Adapt</div>
+      </div>
+      <p style="margin-top:0.9rem;">
+        Demand Shaping Intelligence™ is not a product on its own. 
+        It is the feedback layer that lets commissioners and partners see demand signals emerging before they appear as pressure in urgent and unplanned care.
       </p>
-      <p>
-        This page is a category definition and thought piece for public discussion. 
-        It does not constitute clinical advice or a commercial offer.
-      </p>
-    </footer>
-  </main>
+    </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      // Smooth scrolling for in-page nav links
-      document.querySelectorAll('.nav-link').forEach(function (link) {
-        link.addEventListener('click', function (e) {
-          e.preventDefault();
-          const targetId = this.getAttribute('href').slice(1);
-          const target = document.getElementById(targetId);
-          if (!target) return;
-          const headerOffset = 96;
-          const rect = target.getBoundingClientRect();
-          const offsetTop = rect.top + window.scrollY - headerOffset;
-          window.scrollTo({ top: offsetTop, behavior: 'smooth' });
-        });
-      });
+    <p class="footnote">
+      Together, Support Playlists™ and Demand Shaping Intelligence™ describe a new layer in the stack: non clinical navigation intelligence.
+    </p>
+  </section>
 
-      // Intersection observer to highlight active section in nav
-      const navLinks = document.querySelectorAll('.nav-link');
-      const sections = Array.from(document.querySelectorAll('section')).filter(function (sec) {
-        return sec.id;
-      });
+  <!-- Foundational concepts -->
+  <section id="foundations" class="alt">
+    <div class="section-kicker">Foundational concepts</div>
+    <h2 class="section-title">The field of non clinical navigation intelligence</h2>
+    <p class="section-intro">
+      Support Playlists sit inside a wider conceptual field. 
+      This field can be thought of as <strong>non clinical navigation intelligence</strong> – the ideas and methods that govern how people move through complex systems in everyday life.
+    </p>
 
-      const observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            const id = entry.target.id;
-            navLinks.forEach(function (link) {
-              if (link.getAttribute('href') === '#' + id) {
-                link.classList.add('active');
-              } else {
-                link.classList.remove('active');
-              }
-            });
-          }
-        });
-      }, {
-        threshold: 0.35
-      });
+    <div class="columns two">
+      <div class="card">
+        <h3>Non clinical navigation intelligence</h3>
+        <p>
+          The layer of understanding that focuses on the life around the symptom. 
+          Work, money, caring, housing, identity and belonging. 
+          It learns how people actually navigate support and adapts the routes in real time.
+        </p>
+      </div>
+      <div class="card">
+        <h3>The lived moment</h3>
+        <p>
+          The point at which a person reaches out for help. 
+          Support Playlists are designed to start from this moment, not from abstract population segments. 
+          They assume that how it feels in the first few minutes matters.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Emotional Architecture™</h3>
+        <p>
+          The intentional design of how a journey feels, lands and is remembered. 
+          Emotional Architecture™ shapes language, sequence and expectation so that people feel held rather than processed.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Time sequenced support</h3>
+        <p>
+          Organising help by time rather than by organisation chart. 
+          Tonight. Tomorrow. This week. If it gets worse. 
+          Time sequencing reflects how people actually move through change.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Life signals</h3>
+        <p>
+          The small behavioural signals that show how people are moving through a playlist. 
+          Which steps they take. Where they stall. What they return to. 
+          Life signals power Demand Shaping Intelligence™.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Stabilising demand</h3>
+        <p>
+          The aim is not to push people away from care. 
+          It is to give them a path that stabilises the situation enough that clinical services can focus on what only they can do.
+        </p>
+      </div>
+    </div>
 
-      sections.forEach(function (section) {
-        observer.observe(section);
-      });
-    });
-  </script>
+    <div class="quote">
+      You can think of Support Playlists as emotional architecture applied to navigation. 
+      We are as interested in how a pathway feels as we are in where it routes someone.
+    </div>
+  </section>
+
+  <!-- Boundaries -->
+  <section id="boundaries">
+    <div class="section-kicker">Category boundaries</div>
+    <h2 class="section-title">What Support Playlists are not</h2>
+    <p class="section-intro">
+      Clear boundaries matter. 
+      Support Playlists are designed to work alongside existing tools, not to replace them. 
+      The category is distinct from the products and services that surround it.
+    </p>
+
+    <div class="columns two">
+      <div class="card">
+        <h3>Not a symptom checker</h3>
+        <p>
+          Symptom checkers focus on clinical risk. 
+          Support Playlists focus on the life around the risk. 
+          The two can work together, with playlists sitting alongside or immediately after triage.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Not a directory</h3>
+        <p>
+          Directories list services. 
+          Support Playlists build a small route through the options. 
+          They are editorial and behavioural, not exhaustive.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Not social prescribing</h3>
+        <p>
+          Social prescribing relies on human relationships and skilled connectors. 
+          Support Playlists do not replace this. 
+          They give prescribers and link workers a clearer baseline path to start from.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Not a wellbeing app</h3>
+        <p>
+          Support Playlists are not a direct to consumer lifestyle product. 
+          They are an underlying layer that other platforms and institutions can connect to.
+        </p>
+      </div>
+    </div>
+
+    <div class="badge-row">
+      <span class="badge badge-accent">Support Playlists™ · Navigation engine</span>
+      <span class="badge">Demand Shaping Intelligence™ · Feedback layer</span>
+      <span class="badge">Emotional Architecture™ · Design method</span>
+    </div>
+  </section>
+
+  <!-- Origin -->
+  <section id="origin" class="alt">
+    <div class="section-kicker">Origin story</div>
+    <h2 class="section-title">Where this work began</h2>
+    <p class="section-intro">
+      Support Playlists did not begin in a lab or a headquarters. 
+      They emerged on Portland on the south coast of England, inside one Primary Care Network, through day to day work on access, demand and digital inclusion.
+    </p>
+
+    <p>
+      Since late 2024, work in Weymouth and Portland Primary Care Network has explored:
+    </p>
+    <ul>
+      <li>a PCN wide digital offer for residents, including QuickLinks and peer to peer campaigns</li>
+      <li>Neighbourhood level signals on what people search for and where they get stuck</li>
+      <li>early Support Playlists for mental health, money worries, loneliness and long term conditions</li>
+    </ul>
+    <p>
+      This has been built by a very small team using off the shelf tools and large language models. 
+      The work completed to date is similar in scope to what would previously have required large editorial and analytics teams. 
+      AI has collapsed the cost and time, not the level of care.
+    </p>
+    <p>
+      The concepts of <strong>Support Playlists™</strong> and <strong>Demand Shaping Intelligence™</strong> are being explored and refined in public. 
+      They are held by <strong>Neighbourhood CoLab CIC</strong>, a small organisation created to test emotionally safe AI and neighbourhood based digital infrastructure.
+    </p>
+    <p class="footnote">
+      Originated and developed by <strong>Mark Winterburn</strong> on Portland, Dorset. 
+      This page exists as a clear public record of authorship and intent as the category develops.
+    </p>
+  </section>
+
+  <!-- Opportunities -->
+  <section id="opportunities" class="light">
+    <div class="section-kicker">Two parallel opportunities</div>
+    <h2 class="section-title">A module that can stand up. A category that has not existed.</h2>
+    <p class="section-intro">
+      There are two ways to engage with this work. 
+      The first is practical and near term. 
+      The second is larger and strategic.
+    </p>
+
+    <div class="columns two">
+      <div class="card">
+        <h3>1. The module that switches on</h3>
+        <p>
+          Design and test a Support Playlists module that plugs into an existing triage or digital front door. 
+          This is the implementation route. 
+          Stand something up. Watch how people use it. 
+          Prove that it works for residents and systems.
+        </p>
+      </div>
+      <div class="card">
+        <h3>2. The category level work</h3>
+        <p>
+          Work on the broader emotional architecture and governance of the field. 
+          What it should feel like at national scale when someone anywhere can speak into a device and receive a Support Playlist that reflects their life. 
+          This is the path for investors, policy leaders and large platforms.
+        </p>
+      </div>
+    </div>
+
+    <div class="quote">
+      Whoever defines the category and the standards for non clinical navigation intelligence will shape how future citizens experience help in their first moments of need.
+    </div>
+  </section>
+
+  <!-- Invitation -->
+  <section id="invitation">
+    <div class="section-kicker">Invitation</div>
+    <h2 class="section-title">Ready to explore with commissioners and partners</h2>
+    <p class="section-intro">
+      This page is the beginning of a Support Playlists paper and manifesto. 
+      The intention is simple. 
+      To name the category. 
+      To describe it clearly. 
+      To invite the right partners to help shape it responsibly.
+    </p>
+    <p>
+      If you are commissioning, building or researching the next layer of navigation and support, there are useful conversations to have. 
+      About pilots. About standards. About shared infrastructure. 
+      About how to protect people while making use of what AI can now do.
+    </p>
+
+    <div class="cta-row">
+      <a href="mailto:hello@neighbourhoodcolab.co.uk" class="btn btn-primary">Start a conversation</a>
+      <a href="https://www.linkedin.com/in/mark-winterburn-08a614351/" target="_blank" class="btn btn-ghost" rel="noreferrer">Connect on LinkedIn</a>
+    </div>
+
+    <p class="footnote">
+      This site will grow into a fuller paper over time. 
+      For now it serves as a clear public marker of the Support Playlists™ and Demand Shaping Intelligence™ concepts and as a shared reference point for ongoing work.
+    </p>
+  </section>
+
+  <footer>
+    <p>
+      Support Playlists™ · Demand Shaping Intelligence™ · Emotional Architecture™ are concepts developed by <strong>Mark Winterburn</strong> through Neighbourhood CoLab CIC.
+    </p>
+    <p>
+      This page is a category definition and thought piece for public discussion. 
+      It does not constitute clinical advice or a commercial offer.
+    </p>
+  </footer>
+</main>
 </body>
 </html>
