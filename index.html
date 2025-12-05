@@ -1,4 +1,4 @@
-html<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -230,28 +230,59 @@ html<!DOCTYPE html>
         /* ===== INTELLIGENCE VISUAL ===== */
         .intelligence-visual {
             margin-top: 3rem;
-            padding: 3rem;
-            background: linear-gradient(135deg, rgba(201, 124, 93, 0.05) 0%, rgba(44, 95, 95, 0.05) 100%);
+            padding: 3rem 2rem;
+            background: #0a1628;
             border-radius: 12px;
             text-align: center;
         }
 
-        .intelligence-visual img {
-            display: block;
-            margin: 0 auto 1.5rem;
+        .intelligence-visual svg {
             width: 100%;
-            max-width: 800px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            height: auto;
+            margin: 0 auto;
+            display: block;
         }
 
-        .intelligence-visual p {
-            margin: 0 auto;
+        .land {
+            fill: #2a3f5f;
+            stroke: #1a2940;
+            stroke-width: 1;
+        }
+
+        .heat-point {
+            mix-blend-mode: screen;
+        }
+
+        .climate-caption {
+            margin-top: 2.5rem;
+            text-align: center;
+        }
+
+        .climate-caption p {
             font-size: 1.125rem;
-            color: #1A1A1A;
-            font-style: normal;
-            max-width: 600px;
             line-height: 1.6;
+            color: #ffffff;
+            margin: 0 auto 1rem;
+            max-width: 600px;
+        }
+
+        .climate-tagline {
+            font-size: 1.375rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-top: 0.5rem;
+        }
+
+        /* Desktop adjustments for caption */
+        @media (min-width: 768px) {
+            .climate-caption p {
+                font-size: 1.25rem;
+            }
+            
+            .climate-tagline {
+                font-size: 1.5rem;
+            }
         }
 
         /* ===== THREE COLUMNS ===== */
@@ -428,6 +459,10 @@ html<!DOCTYPE html>
             .examples-grid {
                 grid-template-columns: 1fr;
             }
+
+            .intelligence-visual {
+                padding: 2rem 1rem;
+            }
         }
     </style>
 </head>
@@ -522,24 +557,106 @@ html<!DOCTYPE html>
     </section>
 
     <!-- SECTION 5: THE INTELLIGENCE LAYER -->
-<section id="intelligence">
-    <div class="container">
-        <h2>What if we could see the <span class="accent">emotional climate?</span></h2>
-        <p>Support Playlists doesn't track individuals. No profiles. No accounts. No surveillance.</p>
-        <p>Instead, each Playlist interaction creates a tiny anonymous signal — a moment of need, not a person.</p>
-        <p>Aggregated, these moments reveal:</p>
-        <ul class="principles-list">
-            <li>The emotional climate of communities</li>
-            <li>Patterns of micro-struggle before they become crises</li>
-            <li>Early signals of overwhelm</li>
-            <li>What people need before they hit services</li>
-        </ul>
-        <p style="margin-top: 2rem;">This becomes a new form of public intelligence. Not for enforcement. Not for diagnosis. <strong>For understanding.</strong></p>
+    <section id="intelligence">
+        <div class="container">
+            <h2>What if we could see the <span class="accent">emotional climate?</span></h2>
+            <p>Support Playlists doesn't track individuals. No profiles. No accounts. No surveillance.</p>
+            <p>Instead, each Playlist interaction creates a tiny anonymous signal — a moment of need, not a person.</p>
+            <p>Aggregated, these moments reveal:</p>
+            <ul class="principles-list">
+                <li>The emotional climate of communities</li>
+                <li>Patterns of micro-struggle before they become crises</li>
+                <li>Early signals of overwhelm</li>
+                <li>What people need before they hit services</li>
+            </ul>
+            <p style="margin-top: 2rem;">This becomes a new form of public intelligence. Not for enforcement. Not for diagnosis. <strong>For understanding.</strong></p>
 
-        <div class="intelligence-visual">
-            <img src="emotional-climate-map.png" alt="Emotional climate heatmap showing anonymous aggregated signals across geography">
+            <div class="intelligence-visual">
+                <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
+                    <!-- World map simplified continents -->
+                    <g id="continents">
+                        <!-- North America -->
+                        <path class="land" d="M 50,100 Q 80,60 120,65 Q 160,70 180,90 Q 190,120 180,150 Q 160,180 130,185 Q 100,180 80,160 Q 60,140 50,100 Z"/>
+                        <path class="land" d="M 75,190 L 100,185 L 110,210 L 95,225 L 80,210 Z"/>
+                        
+                        <!-- Central America -->
+                        <path class="land" d="M 110,210 L 120,205 L 135,220 L 130,235 L 115,230 Z"/>
+                        
+                        <!-- South America -->
+                        <path class="land" d="M 130,235 Q 140,230 160,235 Q 180,245 190,270 Q 195,300 185,325 Q 170,340 150,335 Q 135,325 130,300 Q 125,270 130,235 Z"/>
+                        
+                        <!-- Europe -->
+                        <path class="land" d="M 470,80 Q 490,70 515,72 Q 540,75 555,90 Q 560,110 550,125 Q 530,135 510,130 Q 485,120 470,100 Z"/>
+                        
+                        <!-- Africa -->
+                        <path class="land" d="M 480,140 Q 510,135 540,145 Q 565,160 575,190 Q 580,230 570,265 Q 555,290 530,295 Q 505,290 490,270 Q 475,230 480,190 Z"/>
+                        
+                        <!-- Asia -->
+                        <path class="land" d="M 560,65 Q 600,55 650,60 Q 710,65 760,75 Q 810,90 825,120 Q 830,150 815,175 Q 780,190 730,190 Q 680,185 630,175 Q 585,160 565,130 Q 555,100 560,65 Z"/>
+                        
+                        <!-- Southeast Asia -->
+                        <path class="land" d="M 680,195 Q 710,190 730,200 Q 745,215 740,235 L 720,245 L 690,235 Z"/>
+                        
+                        <!-- Australia -->
+                        <path class="land" d="M 750,280 Q 780,275 810,280 Q 835,290 840,315 Q 835,340 810,345 Q 780,345 760,335 Q 745,320 750,295 Z"/>
+                    </g>
+                    
+                    <!-- Heat gradient definitions -->
+                    <defs>
+                        <radialGradient id="heat-high">
+                            <stop offset="0%" style="stop-color:#ff6b35;stop-opacity:0.95" />
+                            <stop offset="40%" style="stop-color:#f7931e;stop-opacity:0.7" />
+                            <stop offset="100%" style="stop-color:#fdc830;stop-opacity:0" />
+                        </radialGradient>
+                        
+                        <radialGradient id="heat-medium">
+                            <stop offset="0%" style="stop-color:#fdc830;stop-opacity:0.85" />
+                            <stop offset="50%" style="stop-color:#37b7c3;stop-opacity:0.6" />
+                            <stop offset="100%" style="stop-color:#088395;stop-opacity:0" />
+                        </radialGradient>
+                        
+                        <radialGradient id="heat-low">
+                            <stop offset="0%" style="stop-color:#088395;stop-opacity:0.75" />
+                            <stop offset="50%" style="stop-color:#05445e;stop-opacity:0.5" />
+                            <stop offset="100%" style="stop-color:#05445e;stop-opacity:0" />
+                        </radialGradient>
+                        
+                        <!-- Blur filter for heat effect -->
+                        <filter id="blur">
+                            <feGaussianBlur in="SourceGraphic" stdDeviation="18" />
+                        </filter>
+                    </defs>
+                    
+                    <!-- Heat layer -->
+                    <g id="heat-layer" filter="url(#blur)">
+                        <!-- High intensity zones -->
+                        <circle class="heat-point" cx="120" cy="120" r="55" fill="url(#heat-high)"/>
+                        <circle class="heat-point" cx="515" cy="100" r="50" fill="url(#heat-high)"/>
+                        <circle class="heat-point" cx="710" cy="110" r="70" fill="url(#heat-high)"/>
+                        <circle class="heat-point" cx="790" cy="95" r="60" fill="url(#heat-high)"/>
+                        
+                        <!-- Medium intensity zones -->
+                        <circle class="heat-point" cx="165" cy="280" r="50" fill="url(#heat-medium)"/>
+                        <circle class="heat-point" cx="530" cy="210" r="55" fill="url(#heat-medium)"/>
+                        <circle class="heat-point" cx="700" cy="150" r="48" fill="url(#heat-medium)"/>
+                        <circle class="heat-point" cx="175" cy="115" r="42" fill="url(#heat-medium)"/>
+                        <circle class="heat-point" cx="800" cy="310" r="45" fill="url(#heat-medium)"/>
+                        
+                        <!-- Low intensity zones -->
+                        <circle class="heat-point" cx="90" cy="205" r="38" fill="url(#heat-low)"/>
+                        <circle class="heat-point" cx="495" cy="165" r="36" fill="url(#heat-low)"/>
+                        <circle class="heat-point" cx="640" cy="135" r="40" fill="url(#heat-low)"/>
+                        <circle class="heat-point" cx="560" cy="250" r="34" fill="url(#heat-low)"/>
+                        <circle class="heat-point" cx="720" cy="220" r="36" fill="url(#heat-low)"/>
+                    </g>
+                </svg>
+                
+                <div class="climate-caption">
+                    <p>An evolving map of mood and need, drawn only from anonymous patterns in how people seek help.</p>
+                    <p class="climate-tagline">A climate map of care.</p>
+                </div>
+            </div>
         </div>
-    </div>
     </section>
 
     <!-- SECTION 6: WHO THIS IS FOR -->
