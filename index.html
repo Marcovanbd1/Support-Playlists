@@ -1,812 +1,387 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Support Playlists — Emotional Navigation for Real Life</title>
-    <style>
-        /* ===== RESET & BASE ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-            background: #FDFCFA;
-            color: #1A1A1A;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* ===== TYPOGRAPHY ===== */
-        h1, h2, h3 {
-            font-weight: 600;
-            line-height: 1.2;
-            letter-spacing: -0.02em;
-        }
-
-        h1 {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            margin-bottom: 1.5rem;
-        }
-
-        h2 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            margin-bottom: 1.5rem;
-        }
-
-        h3 {
-            font-size: clamp(1.5rem, 3vw, 2rem);
-            margin-bottom: 1rem;
-        }
-
-        p {
-            font-size: clamp(1.125rem, 2vw, 1.3rem);
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-            max-width: 65ch;
-        }
-
-        /* ===== HEADER ===== */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            padding: 1.5rem 2rem;
-            background: rgba(253, 252, 250, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .logo {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: #1A1A1A;
-            text-decoration: none;
-        }
-
-        /* ===== PROGRESS INDICATOR ===== */
-        .progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 3px;
-            background: #C97C5D;
-            width: 0%;
-            z-index: 1001;
-            transition: width 0.1s ease;
-        }
-
-        /* ===== SECTIONS ===== */
-        section {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 6rem 2rem;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .container {
-            max-width: 680px;
-            width: 100%;
-        }
-
-        .container-wide {
-            max-width: 1000px;
-            width: 100%;
-        }
-
-        /* ===== HERO SECTION ===== */
-        .hero {
-            min-height: 100vh;
-            padding-top: 8rem;
-        }
-
-        .hero h1 {
-            margin-bottom: 2rem;
-        }
-
-        .hero p {
-            font-size: clamp(1.25rem, 2.5vw, 1.5rem);
-            color: #444;
-        }
-
-        /* ===== THE GAP SECTION ===== */
-        .gap-visual {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .gap-column {
-            padding: 2rem;
-            border-radius: 8px;
-            background: rgba(0, 0, 0, 0.02);
-        }
-
-        .gap-column.empty {
-            background: transparent;
-            border: 2px dashed #C97C5D;
-            position: relative;
-        }
-
-        .gap-column h4 {
-            font-size: 1.125rem;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-
-        .gap-column p {
-            font-size: 1rem;
-            color: #666;
-            margin: 0;
-        }
-
-        .gap-column.empty::after {
-            content: "← This is what's missing";
-            position: absolute;
-            bottom: -2.5rem;
-            left: 0;
-            font-size: 0.875rem;
-            color: #C97C5D;
-            font-weight: 600;
-        }
-
-        /* ===== PLAYLIST EXAMPLE ===== */
-        .playlist-example {
-            background: #F8F7F5;
-            border-radius: 12px;
-            padding: 2.5rem;
-            margin-top: 3rem;
-            border-left: 4px solid #C97C5D;
-        }
-
-        .playlist-example h4 {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            color: #1A1A1A;
-            font-style: italic;
-            font-weight: 500;
-        }
-
-        .playlist-step {
-            margin-bottom: 1.5rem;
-            padding-left: 1.5rem;
-            border-left: 2px solid rgba(201, 124, 93, 0.2);
-        }
-
-        .playlist-step:last-child {
-            margin-bottom: 0;
-        }
-
-        .playlist-step strong {
-            display: block;
-            font-size: 1rem;
-            margin-bottom: 0.25rem;
-            color: #C97C5D;
-        }
-
-        .playlist-step p {
-            margin: 0;
-            font-size: 1.125rem;
-            color: #1A1A1A;
-        }
-
-        /* ===== EA PRINCIPLES ===== */
-        .principles-list {
-            margin-top: 2rem;
-            padding-left: 0;
-            list-style: none;
-        }
-
-        .principles-list li {
-            font-size: 1.25rem;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            color: #444;
-        }
-
-        .principles-list li:last-child {
-            border-bottom: none;
-        }
-
-        /* ===== INTELLIGENCE VISUAL ===== */
-        .intelligence-visual {
-            margin-top: 3rem;
-            padding: 3rem 2rem;
-            background: #0a1628;
-            border-radius: 12px;
-            text-align: center;
-        }
-
-        .intelligence-visual svg {
-            width: 100%;
-            max-width: 900px;
-            height: auto;
-            margin: 0 auto;
-            display: block;
-        }
-
-        .land {
-            fill: #2a3f5f;
-            stroke: #1a2940;
-            stroke-width: 1;
-        }
-
-        .heat-point {
-            mix-blend-mode: screen;
-        }
-
-        .climate-caption {
-            margin-top: 2.5rem;
-            text-align: center;
-        }
-
-        .climate-caption p {
-            font-size: 1.125rem;
-            line-height: 1.6;
-            color: #ffffff;
-            margin: 0 auto 1rem;
-            max-width: 600px;
-        }
-
-        .climate-tagline {
-            font-size: 1.375rem;
-            font-weight: 600;
-            color: #ffffff;
-            margin-top: 0.5rem;
-        }
-
-        /* Desktop adjustments for caption */
-        @media (min-width: 768px) {
-            .climate-caption p {
-                font-size: 1.25rem;
-            }
-            
-            .climate-tagline {
-                font-size: 1.5rem;
-            }
-        }
-
-        /* ===== THREE COLUMNS ===== */
-        .three-columns {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 3rem;
-            margin-top: 3rem;
-        }
-
-        .column {
-            padding: 0;
-        }
-
-        .column h4 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #C97C5D;
-        }
-
-        .column p {
-            font-size: 1.125rem;
-            color: #444;
-            margin: 0;
-        }
-
-        /* ===== MAKE IT YOURS SECTION ===== */
-        .examples-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.5rem;
-            margin: 2.5rem 0;
-        }
-
-        .example-card {
-            background: #F8F7F5;
-            padding: 1.5rem;
-            border-radius: 8px;
-            border-left: 3px solid #C97C5D;
-        }
-
-        .example-card p {
-            margin: 0;
-            font-size: 1.125rem;
-            color: #444;
-            font-style: italic;
-        }
-
-        .format-box {
-            background: rgba(201, 124, 93, 0.08);
-            border-radius: 8px;
-            padding: 2rem;
-            margin: 2rem 0;
-            border: 1px solid rgba(201, 124, 93, 0.2);
-        }
-
-        .format-box p {
-            margin: 0;
-            font-size: 1.125rem;
-            color: #1A1A1A;
-            font-weight: 500;
-        }
-
-        /* ===== TEAM SECTION ===== */
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2.5rem;
-            margin-top: 3rem;
-        }
-
-        .team-member {
-            padding: 0;
-        }
-
-        .team-member h4 {
-            font-size: 1.25rem;
-            margin-bottom: 0.5rem;
-            color: #1A1A1A;
-        }
-
-        .team-member .role {
-            font-size: 0.95rem;
-            color: #C97C5D;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .team-member p {
-            font-size: 1rem;
-            color: #666;
-            margin: 0;
-            line-height: 1.6;
-        }
-
-        /* ===== CTA SECTION ===== */
-        .cta-section {
-            text-align: center;
-            background: #F8F7F5;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 3rem;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 1.125rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary {
-            background: #C97C5D;
-            color: #FDFCFA;
-        }
-
-        .btn-primary:hover {
-            background: #B86B4D;
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: #1A1A1A;
-            border: 2px solid #1A1A1A;
-        }
-
-        .btn-secondary:hover {
-            background: #1A1A1A;
-            color: #FDFCFA;
-            transform: translateY(-2px);
-        }
-
-        /* ===== ACCENT TEXT ===== */
-        .accent {
-            color: #C97C5D;
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 768px) {
-            section {
-                min-height: auto;
-                padding: 4rem 1.5rem;
-            }
-
-            .hero {
-                padding-top: 6rem;
-            }
-
-            .gap-column.empty::after {
-                position: relative;
-                bottom: auto;
-                display: block;
-                margin-top: 1rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .btn {
-                text-align: center;
-            }
-
-            .examples-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .intelligence-visual {
-                padding: 2rem 1rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The hidden discharge constraint — a note for Mark Mould</title>
+  <meta name="description" content="A short operational note for Mark Mould, COO at University Hospitals Dorset. Discharge, flow, and the community layer that makes next steps usable in real life." />
+
+  <style>
+    :root{
+      --text:#171717;
+      --muted:#5a5a5a;
+      --bg:#ffffff;
+      --soft:#f6f7f8;
+      --border:#e7e7e7;
+      --accent:#0a4d3c;
+      --accent2:#0f6b55;
+      --max:780px;
+    }
+
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      line-height:1.65;
+    }
+
+    a{ color:var(--accent); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:56px 22px 96px;
+    }
+
+    .kicker{
+      display:inline-block;
+      padding:6px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      letter-spacing:.2px;
+    }
+
+    h1{
+      font-size:36px;
+      line-height:1.12;
+      margin:14px 0 10px;
+      letter-spacing:-.4px;
+    }
+
+    .sub{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:18px;
+      max-width:66ch;
+    }
+
+    .meta{
+      margin:18px 0 0;
+      padding:14px 16px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:linear-gradient(180deg, #ffffff 0%, #fbfbfb 100%);
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px 14px;
+      align-items:center;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .meta strong{ color:var(--text); font-weight:600; }
+
+    .hr{
+      height:1px;
+      background:var(--border);
+      margin:28px 0;
+    }
+
+    h2{
+      font-size:20px;
+      margin:0 0 10px;
+      letter-spacing:-.2px;
+    }
+
+    p{ margin:0 0 14px; }
+
+    .callout{
+      border-left:4px solid var(--accent2);
+      padding:12px 14px;
+      background:#f3fbf8;
+      border-radius:10px;
+      margin:14px 0;
+    }
+
+    .callout p{ margin:0 0 8px; }
+    .callout p:last-child{ margin:0; }
+
+    .card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:18px 18px 16px;
+      background:var(--soft);
+      margin:14px 0;
+    }
+
+    .card h3{
+      margin:0 0 8px;
+      font-size:16px;
+      letter-spacing:-.1px;
+    }
+
+    ul{
+      margin:10px 0 0 20px;
+      padding:0;
+    }
+
+    li{ margin:6px 0; }
+
+    .pillrow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin:10px 0 0;
+    }
+
+    .pill{
+      font-size:13px;
+      border:1px solid var(--border);
+      padding:7px 10px;
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+    }
+
+    .two{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:14px;
+      margin:12px 0 2px;
+    }
+
+    @media(min-width:860px){
+      .two{ grid-template-columns: 1fr 1fr; }
+    }
+
+    .cta{
+      margin:22px 0 0;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+    }
+
+    .btn{
+      display:inline-block;
+      padding:11px 14px;
+      border-radius:12px;
+      background:var(--accent);
+      color:#fff;
+      font-weight:600;
+      font-size:14px;
+      border:1px solid var(--accent);
+    }
+
+    .btn:hover{
+      background:#083d30;
+      text-decoration:none;
+    }
+
+    .btn2{
+      display:inline-block;
+      padding:11px 14px;
+      border-radius:12px;
+      background:#fff;
+      color:var(--accent);
+      font-weight:600;
+      font-size:14px;
+      border:1px solid var(--border);
+    }
+
+    .btn2:hover{
+      border-color:#cfd6d3;
+      text-decoration:none;
+    }
+
+    .small{
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    footer{
+      margin-top:44px;
+      padding-top:18px;
+      border-top:1px solid var(--border);
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .tight{ margin-bottom:8px; }
+  </style>
 </head>
+
 <body>
+  <main class="wrap">
+    <span class="kicker">A short operational note for Mark Mould, COO at University Hospitals Dorset</span>
 
-    <!-- PROGRESS BAR -->
-    <div class="progress-bar" id="progressBar"></div>
+    <h1>The hidden discharge constraint</h1>
+    <p class="sub">
+      Control centres can see pressure in real time. What they rarely see is whether the person leaving hospital knows what to do next.
+    </p>
 
-    <!-- HEADER -->
-    <header>
-        <a href="#hero" class="logo">Support Playlists</a>
-    </header>
+    <div class="meta">
+      <span><strong>From:</strong> Mark Winterburn</span>
+      <span><strong>Focus:</strong> discharge, flow, community handover</span>
+      <span><strong>Context:</strong> neighbourhood-level infrastructure</span>
+      <span>🔗 <a href="https://neighbourhoodcolab.netlify.app/" target="_blank" rel="noopener">neighbourhoodcolab.netlify.app</a></span>
+    </div>
 
-    <!-- SECTION 1: HERO / OPENING PROVOCATION -->
-    <section id="hero" class="hero">
-        <div class="container">
-            <h1>We built systems for crisis.<br>Nothing for the moments before.</h1>
-            <p>Small emotional struggles happen every day. Exhaustion that won't lift. Decision paralysis. The feeling of failing at everything. These aren't clinical problems. They're navigable moments. But we have nowhere to take them.</p>
-        </div>
-    </section>
+    <div class="hr"></div>
 
-    <!-- SECTION 2: THE GAP -->
-    <section id="gap">
-        <div class="container-wide">
-            <h2>Between "I'm fine" and "I need help" — there's nothing.</h2>
-            <p>Clinical services catch you when you fall. Wellness apps tell you to optimize. Social media turns struggle into content. But no one helps you navigate the small, stuck moments of being human.</p>
-            
-            <div class="gap-visual">
-                <div class="gap-column">
-                    <h4>Clinical Systems</h4>
-                    <p>Crisis intervention</p>
-                </div>
-                <div class="gap-column empty">
-                    <h4>Daily Navigation</h4>
-                    <p>Missing layer</p>
-                </div>
-                <div class="gap-column">
-                    <h4>Wellness Apps</h4>
-                    <p>Self-optimization</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <h2>Why this matters</h2>
+    <p>
+      Your post about extending acute control centres into the community was unusually precise. It points to a real operational gap.
+    </p>
+    <p>
+      Hospitals can determine when someone is medically ready to leave. But the system is weaker at the moment life resumes.
+      Support becomes fragmented, instructions become interpretation, and responsibility shifts silently to the person or family.
+    </p>
 
-    <!-- SECTION 3: INTRODUCING SUPPORT PLAYLISTS -->
-    <section id="playlists">
-        <div class="container">
-            <h2>Support Playlists: <span class="accent">Emotional navigation for real life</span></h2>
-            <p>You say how you feel — by voice or text.<br>
-            You get a Playlist: 3–6 small, doable steps.<br>
-            Grounded in emotional truth. Low effort. Low pressure. Non-clinical.</p>
-            <p>A Playlist isn't therapy or advice. It's navigation — a gentle shift out of stuckness.</p>
+    <div class="callout">
+      <p><strong>Constraint:</strong> discharge decisions are visible. Real-world follow-through is not.</p>
+      <p class="small">That gap quietly drives avoidable contacts, avoidable anxiety, and avoidable returns.</p>
+    </div>
 
-            <div class="playlist-example">
-                <h4>"I feel like I'm letting everyone down"</h4>
-                <div class="playlist-step">
-                    <strong>1. Name it:</strong>
-                    <p>"You're carrying too much care"</p>
-                </div>
-                <div class="playlist-step">
-                    <strong>2. Do this:</strong>
-                    <p>Let one small thing go undone today — on purpose</p>
-                </div>
-                <div class="playlist-step">
-                    <strong>3. Then this:</strong>
-                    <p>Sit for 2 minutes without fixing anything</p>
-                </div>
-                <div class="playlist-step">
-                    <strong>4. Notice:</strong>
-                    <p>Did the weight shift at all?</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="hr"></div>
 
-    <!-- SECTION 4: EMOTIONAL ARCHITECTURE -->
-    <section id="ea">
-        <div class="container">
-            <h2>Emotional Architecture:<br>Designing for how people <span class="accent">actually</span> feel</h2>
-            <p>Emotional Architecture is a design discipline for building tools, products, and systems around emotional states — not business logic or clinical frameworks.</p>
-            
-            <ul class="principles-list">
-                <li>Psychological safety</li>
-                <li>Friction reduction</li>
-                <li>Clarity and tone</li>
-                <li>The feeling of being understood</li>
-                <li>Helping people move through emotions, not suppress them</li>
-            </ul>
+    <h2>What I’m building</h2>
+    <p>
+      An approach called <strong>Support Playlists</strong>. Think of it as a discharge and recovery companion layer designed for real life, not service structures.
+    </p>
 
-            <p style="margin-top: 2rem;">Support Playlists is the purest expression of Emotional Architecture so far.</p>
-        </div>
-    </section>
+    <div class="card">
+      <h2 style="margin:0 0 8px;">In plain terms</h2>
+      <p class="tight">
+        A Support Playlist is a clear, personalised set of next steps and support options based on what someone says is happening, where they live, and what support actually exists nearby.
+      </p>
+      <p class="tight">
+        Delivered in a format that works under stress, on a phone, in minutes.
+      </p>
+      <div class="callout" style="margin:12px 0 0;">
+        <p class="tight"><strong>Not:</strong> “Which service do I pick?”</p>
+        <p><strong>But:</strong> “Here’s what to do next.”</p>
+      </div>
 
-    <!-- SECTION 5: THE INTELLIGENCE LAYER -->
-    <section id="intelligence">
-        <div class="container">
-            <h2>What if we could see the <span class="accent">emotional climate?</span></h2>
-            <p>Support Playlists doesn't track individuals. No profiles. No accounts. No surveillance.</p>
-            <p>Instead, each Playlist interaction creates a tiny anonymous signal — a moment of need, not a person.</p>
-            <p>Aggregated, these moments reveal:</p>
-            <ul class="principles-list">
-                <li>The emotional climate of communities</li>
-                <li>Patterns of micro-struggle before they become crises</li>
-                <li>Early signals of overwhelm</li>
-                <li>What people need before they hit services</li>
-            </ul>
-            <p style="margin-top: 2rem;">This becomes a new form of public intelligence. Not for enforcement. Not for diagnosis. <strong>For understanding.</strong></p>
+      <div class="pillrow">
+        <span class="pill">post-discharge</span>
+        <span class="pill">community navigation</span>
+        <span class="pill">reduces avoidable contacts</span>
+        <span class="pill">equity by default</span>
+      </div>
+    </div>
 
-            <div class="intelligence-visual">
-                <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
-                    <!-- World map simplified continents -->
-                    <g id="continents">
-                        <!-- North America -->
-                        <path class="land" d="M 50,100 Q 80,60 120,65 Q 160,70 180,90 Q 190,120 180,150 Q 160,180 130,185 Q 100,180 80,160 Q 60,140 50,100 Z"/>
-                        <path class="land" d="M 75,190 L 100,185 L 110,210 L 95,225 L 80,210 Z"/>
-                        
-                        <!-- Central America -->
-                        <path class="land" d="M 110,210 L 120,205 L 135,220 L 130,235 L 115,230 Z"/>
-                        
-                        <!-- South America -->
-                        <path class="land" d="M 130,235 Q 140,230 160,235 Q 180,245 190,270 Q 195,300 185,325 Q 170,340 150,335 Q 135,325 130,300 Q 125,270 130,235 Z"/>
-                        
-                        <!-- Europe -->
-                        <path class="land" d="M 470,80 Q 490,70 515,72 Q 540,75 555,90 Q 560,110 550,125 Q 530,135 510,130 Q 485,120 470,100 Z"/>
-                        
-                        <!-- Africa -->
-                        <path class="land" d="M 480,140 Q 510,135 540,145 Q 565,160 575,190 Q 580,230 570,265 Q 555,290 530,295 Q 505,290 490,270 Q 475,230 480,190 Z"/>
-                        
-                        <!-- Asia -->
-                        <path class="land" d="M 560,65 Q 600,55 650,60 Q 710,65 760,75 Q 810,90 825,120 Q 830,150 815,175 Q 780,190 730,190 Q 680,185 630,175 Q 585,160 565,130 Q 555,100 560,65 Z"/>
-                        
-                        <!-- Southeast Asia -->
-                        <path class="land" d="M 680,195 Q 710,190 730,200 Q 745,215 740,235 L 720,245 L 690,235 Z"/>
-                        
-                        <!-- Australia -->
-                        <path class="land" d="M 750,280 Q 780,275 810,280 Q 835,290 840,315 Q 835,340 810,345 Q 780,345 760,335 Q 745,320 750,295 Z"/>
-                    </g>
-                    
-                    <!-- Heat gradient definitions -->
-                    <defs>
-                        <radialGradient id="heat-high">
-                            <stop offset="0%" style="stop-color:#ff6b35;stop-opacity:0.95" />
-                            <stop offset="40%" style="stop-color:#f7931e;stop-opacity:0.7" />
-                            <stop offset="100%" style="stop-color:#fdc830;stop-opacity:0" />
-                        </radialGradient>
-                        
-                        <radialGradient id="heat-medium">
-                            <stop offset="0%" style="stop-color:#fdc830;stop-opacity:0.85" />
-                            <stop offset="50%" style="stop-color:#37b7c3;stop-opacity:0.6" />
-                            <stop offset="100%" style="stop-color:#088395;stop-opacity:0" />
-                        </radialGradient>
-                        
-                        <radialGradient id="heat-low">
-                            <stop offset="0%" style="stop-color:#088395;stop-opacity:0.75" />
-                            <stop offset="50%" style="stop-color:#05445e;stop-opacity:0.5" />
-                            <stop offset="100%" style="stop-color:#05445e;stop-opacity:0" />
-                        </radialGradient>
-                        
-                        <!-- Blur filter for heat effect -->
-                        <filter id="blur">
-                            <feGaussianBlur in="SourceGraphic" stdDeviation="18" />
-                        </filter>
-                    </defs>
-                    
-                    <!-- Heat layer -->
-                    <g id="heat-layer" filter="url(#blur)">
-                        <!-- High intensity zones -->
-                        <circle class="heat-point" cx="120" cy="120" r="55" fill="url(#heat-high)"/>
-                        <circle class="heat-point" cx="515" cy="100" r="50" fill="url(#heat-high)"/>
-                        <circle class="heat-point" cx="710" cy="110" r="70" fill="url(#heat-high)"/>
-                        <circle class="heat-point" cx="790" cy="95" r="60" fill="url(#heat-high)"/>
-                        
-                        <!-- Medium intensity zones -->
-                        <circle class="heat-point" cx="165" cy="280" r="50" fill="url(#heat-medium)"/>
-                        <circle class="heat-point" cx="530" cy="210" r="55" fill="url(#heat-medium)"/>
-                        <circle class="heat-point" cx="700" cy="150" r="48" fill="url(#heat-medium)"/>
-                        <circle class="heat-point" cx="175" cy="115" r="42" fill="url(#heat-medium)"/>
-                        <circle class="heat-point" cx="800" cy="310" r="45" fill="url(#heat-medium)"/>
-                        
-                        <!-- Low intensity zones -->
-                        <circle class="heat-point" cx="90" cy="205" r="38" fill="url(#heat-low)"/>
-                        <circle class="heat-point" cx="495" cy="165" r="36" fill="url(#heat-low)"/>
-                        <circle class="heat-point" cx="640" cy="135" r="40" fill="url(#heat-low)"/>
-                        <circle class="heat-point" cx="560" cy="250" r="34" fill="url(#heat-low)"/>
-                        <circle class="heat-point" cx="720" cy="220" r="36" fill="url(#heat-low)"/>
-                    </g>
-                </svg>
-                
-                <div class="climate-caption">
-                    <p>An evolving map of mood and need, drawn only from anonymous patterns in how people seek help.</p>
-                    <p class="climate-tagline">A climate map of care.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="hr"></div>
 
-    <!-- SECTION 6: WHO THIS IS FOR -->
-    <section id="audiences">
-        <div class="container-wide">
-            <h2>Built for the moments <span class="accent">everyone</span> has</h2>
-            
-            <div class="three-columns">
-                <div class="column">
-                    <h4>People</h4>
-                    <p>Navigate small emotional moments before they grow. No sign-up. No pressure. Just guidance when you need it.</p>
-                </div>
-                <div class="column">
-                    <h4>Creators</h4>
-                    <p>A new format: Support Playlists you can make, share, and remix. Take the structure and make it yours.</p>
-                </div>
-                <div class="column">
-                    <h4>Systems</h4>
-                    <p>Pre-clinical navigation intelligence. See emotional climate. Shape demand before crisis. Complement clinical services with human guidance.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <h2>Why this is operationally useful</h2>
 
-    <!-- SECTION 7: MAKE IT YOURS -->
-    <section id="make-it-yours">
-        <div class="container">
-            <h2>The format is open. <span class="accent">Make it yours.</span></h2>
-            <p>Support Playlists isn't just a tool — it's a format anyone can use.</p>
-            <p>Creators are already making Playlists for:</p>
+    <div class="two">
+      <div class="card" style="background:#fff;">
+        <h3>1. Fewer avoidable rebounds</h3>
+        <p style="margin:0;">
+          When next steps are obvious, people are less likely to default to A&E, 999, or ward calls. The aim is to make the right support easier to reach than staying confused.
+        </p>
+      </div>
 
-            <div class="examples-grid">
-                <div class="example-card">
-                    <p>Sunday night dread</p>
-                </div>
-                <div class="example-card">
-                    <p>Decision paralysis</p>
-                </div>
-                <div class="example-card">
-                    <p>3pm slump</p>
-                </div>
-                <div class="example-card">
-                    <p>When everyone needs you at once</p>
-                </div>
-            </div>
+      <div class="card" style="background:#fff;">
+        <h3>2. A community extension that actually acts</h3>
+        <p style="margin:0;">
+          Control centres can see pressure. This provides a mechanism for the community layer to respond to it. Not visibility alone, usable next steps.
+        </p>
+      </div>
 
-            <div class="format-box">
-                <p>The structure is simple: emotional state + 3–6 small steps.</p>
-            </div>
+      <div class="card" style="background:#fff;">
+        <h3>3. Cleaner handover language</h3>
+        <p style="margin:0;">
+          Discharge advice is often policy-shaped. Support Playlists translate it into action-shaped guidance, in everyday words.
+        </p>
+      </div>
 
-            <p>Take it. Remix it. Share it.</p>
-            <p><strong>This is how the format spreads.</strong></p>
-        </div>
-    </section>
+      <div class="card" style="background:#fff;">
+        <h3>4. Better equity under pressure</h3>
+        <p style="margin:0;">
+          The people most at risk are usually least able to navigate complexity. This reduces reliance on insider knowledge.
+        </p>
+      </div>
+    </div>
 
-    <!-- SECTION 8: THE TEAM -->
-    <section id="team">
-        <div class="container-wide">
-            <h2>The <span class="accent">emotional scaffolding</span></h2>
-            <p>Support Playlists is driven by Mark Winterburn (Digital & Transformation Lead, Weymouth & Portland PCN). But it's held up by three frontline professionals with 25+ years of experience each:</p>
+    <div class="hr"></div>
 
-            <div class="team-grid">
-                <div class="team-member">
-                    <h4>Dr Bruce</h4>
-                    <span class="role">NHS Psychologist (25+ years)</span>
-                    <p>Psychological safety. Clinical boundaries. Trauma-informed practice.</p>
-                </div>
-                <div class="team-member">
-                    <h4>Lucy</h4>
-                    <span class="role">NHS Nurse (25+ years)</span>
-                    <p>Emotional truth. Frontline reality. Compassionate grounding.</p>
-                </div>
-                <div class="team-member">
-                    <h4>Justin</h4>
-                    <span class="role">Social Worker (25+ years)</span>
-                    <p>Crisis navigation. Safeguarding. Systems empathy.</p>
-                </div>
-            </div>
+    <h2>Where this fits your model</h2>
+    <p>
+      If control centres evolve beyond the acute site, there is a natural division of labour:
+    </p>
 
-            <p style="margin-top: 2rem;">Together, they ensure Support Playlists is safe, real, and human.</p>
-        </div>
-    </section>
+    <div class="two">
+      <div class="card" style="background:#fff;">
+        <h3>Control centre</h3>
+        <ul>
+          <li>real-time awareness</li>
+          <li>flow decisions</li>
+          <li>escalation</li>
+        </ul>
+      </div>
 
-    <!-- SECTION 9: THE CATEGORY -->
-    <section id="category">
-        <div class="container">
-            <h2>A new category:<br><span class="accent">Non-Clinical Navigation Intelligence</span></h2>
-            <p>Support Playlists creates a category that didn't exist:</p>
-            <p><strong>Non-Clinical Navigation Intelligence</strong> — helping people in the micro-moments before they become patients, before emotions escalate into crises.</p>
-            <p>It sits between wellness and clinical care. It's infrastructure for emotional navigation.</p>
-        </div>
-    </section>
+      <div class="card" style="background:#fff;">
+        <h3>Neighbourhood layer</h3>
+        <ul>
+          <li>next-step navigation</li>
+          <li>continuity support</li>
+          <li>family clarity</li>
+        </ul>
+      </div>
 
-    <!-- SECTION 10: CTA -->
-    <section id="cta" class="cta-section">
-        <div class="container">
-            <h2>This is just beginning.</h2>
-            <p>Support Playlists is live in prototype. Nurses will be the first to use it. Creators will amplify it. NHS systems will integrate it.</p>
-            <p>If this resonates — if you see what we're building — we want to hear from you.</p>
+      <div class="card" style="background:#fff;">
+        <h3>Feedback layer</h3>
+        <ul>
+          <li>aggregated patterns of need</li>
+          <li>early signals</li>
+          <li>operational intelligence</li>
+        </ul>
+      </div>
 
-            <div class="cta-buttons">
-                <a href="#" class="btn btn-primary">Try Support Playlists</a>
-                <a href="mailto:mark@supportplaylists.co.uk" class="btn btn-secondary">Get in touch</a>
-            </div>
-        </div>
-    </section>
+      <div class="card" style="background:#fff;">
+        <h3>Policy direction</h3>
+        <p style="margin:0;">
+          This direction is consistent with the NHS Ten Year Plan’s shift toward neighbourhood care, prevention, and earlier intervention. The difference is the focus on a practical mechanism that makes that shift operational.
+        </p>
+      </div>
+    </div>
 
-    <!-- JAVASCRIPT -->
-    <script>
-        // ===== SCROLL ANIMATIONS =====
-        const sections = document.querySelectorAll('section');
-        
-        const observerOptions = {
-            threshold: 0.15,
-            rootMargin: '0px 0px -10% 0px'
-        };
+    <div class="callout">
+      <p><strong>This is not another system.</strong> It’s a translation layer between discharge and real life.</p>
+    </div>
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
+    <div class="hr"></div>
 
-        sections.forEach(section => {
-            observer.observe(section);
-        });
+    <h2>Governance</h2>
+    <p>
+      Designed to be safe to test early:
+    </p>
+    <ul>
+      <li>no patient-identifiable data required for initial learning</li>
+      <li>small cohort start possible</li>
+      <li>sits within existing governance structures</li>
+    </ul>
 
-        // ===== PROGRESS BAR =====
-        window.addEventListener('scroll', () => {
-            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (window.scrollY / windowHeight) * 100;
-            document.getElementById('progressBar').style.width = scrolled + '%';
-        });
+    <div class="hr"></div>
 
-        // ===== SMOOTH SCROLL FOR ANCHOR LINKS =====
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-    </script>
+    <h2>Simple next step</h2>
+    <p>
+      If useful, I can share a short example of what this looks like in practice for a discharge scenario, and we can quickly test whether it would actually reduce friction.
+    </p>
 
+    <div class="cta">
+      <a class="btn" href="https://neighbourhoodcolab.netlify.app/" target="_blank" rel="noopener">Neighbourhood CoLab</a>
+      <a class="btn2" href="mailto:mark.winterburn@nhs.net?subject=UHD%20control%20centres%20and%20the%20hidden%20discharge%20constraint&body=Hi%20Mark%2C%0A%0AI%20saw%20your%20post%20about%20extending%20acute%20control%20centres%20into%20the%20community.%20I%E2%80%99ve%20been%20building%20a%20discharge%20and%20recovery%20navigation%20layer%20called%20Support%20Playlists.%20Happy%20to%20share%20a%20short%20example%20and%20sanity-check%20whether%20it%20could%20reduce%20friction.%0A%0ABest%2C%0AMark">Email me</a>
+      <span class="small">Or reply on LinkedIn and I’ll send a one-page version.</span>
+    </div>
+
+    <footer>
+      <p style="margin:0 0 10px;">
+        Built by Mark Winterburn, on Portland, Dorset. Neighbourhood navigation, demand-shaping intelligence, operational relief.
+      </p>
+      <p style="margin:0;">
+        Reference link: <a href="https://neighbourhoodcolab.netlify.app/" target="_blank" rel="noopener">neighbourhoodcolab.netlify.app</a>
+      </p>
+    </footer>
+  </main>
 </body>
 </html>
